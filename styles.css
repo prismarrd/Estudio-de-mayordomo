@@ -89,23 +89,26 @@ html, body {
 .tree-bg-container {
     position: fixed;
     bottom: -10px;
-    right: 5%;
-    width: clamp(280px, 32vh, 480px);
-    height: clamp(280px, 32vh, 480px);
+    right: 4%;
+    width: clamp(300px, 34vh, 500px);
+    height: clamp(300px, 34vh, 500px);
     z-index: 5;
     pointer-events: none;
-    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-    opacity: 0.45;
-    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
+    transition: all 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0.65;
+    filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.3));
 }
 
 .tree-bg-container.full-hero {
-    right: 50%;
-    bottom: 50px;
-    transform: translateX(50%) scale(1.6);
-    width: clamp(340px, 42vh, 600px);
-    height: clamp(340px, 42vh, 600px);
-    opacity: 0.85;
+    left: 50%;
+    right: auto;
+    bottom: -20px;
+    transform: translateX(-50%) scale(1.45);
+    width: clamp(400px, 52vh, 700px);
+    height: clamp(400px, 52vh, 700px);
+    opacity: 0.98;
+    z-index: 6;
+    filter: drop-shadow(0 0 45px rgba(212, 175, 55, 0.6));
 }
 
 .tree-svg {
@@ -117,26 +120,25 @@ html, body {
 /* Elementos SVG del Árbol */
 .tree-trunk {
     fill: none;
-    stroke: #8c6838;
+    stroke: url(#trunkGrad);
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 1, 0.5, 1), stroke-width 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
 }
 
 .tree-leaf {
-    fill: #22c55e;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.9s ease;
     transform-origin: center;
 }
 
-.tree-fruit {
-    fill: var(--gold-main);
-    opacity: 0;
-    transform: scale(0);
-    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(0 0 8px var(--gold-light));
+.tree-fruit-group {
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.9s ease;
+    animation: fruitGlowPulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes fruitGlowPulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(254, 240, 138, 0.7)); }
+    100% { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(254, 240, 138, 1)); }
 }
 
 .tree-seed {

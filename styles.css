@@ -1,0 +1,555 @@
+/* ==========================================================================
+   ESTUDIO BÍBLICO CONGREGACIONAL: EL MAYORDOMO FIEL
+   Árbol Evolutivo en Fondo & Estilos de Diapositiva
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+    --bg-dark: #060911;
+    --bg-card: rgba(14, 21, 35, 0.88);
+    
+    --gold-main: #d4af37;
+    --gold-light: #f6e6b4;
+    --gold-dark: #9a7b2c;
+    --gold-glow: rgba(212, 175, 55, 0.28);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-accent: #f4e3b2;
+    
+    --font-title: 'Cinzel', serif;
+    --font-quote: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+}
+
+#presentation-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 45%, #0f182e 0%, #05080e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ambient-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(30, 50, 85, 0.28) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.biblical-cross-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vh;
+    height: 50vh;
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 2;
+    background: 
+        linear-gradient(to right, transparent 48%, #d4af37 48%, #d4af37 52%, transparent 52%),
+        linear-gradient(to bottom, transparent 30%, #d4af37 30%, #d4af37 38%, transparent 38%);
+}
+
+/* ==========================================================================
+   ELEMENTO VISUAL EVOLUTIVO — ÁRBOL BÍBLICO QUE CRECE EN EL FONDO
+   ========================================================================== */
+.tree-bg-container {
+    position: fixed;
+    bottom: -10px;
+    right: 5%;
+    width: clamp(280px, 32vh, 480px);
+    height: clamp(280px, 32vh, 480px);
+    z-index: 5;
+    pointer-events: none;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+    opacity: 0.45;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
+}
+
+.tree-bg-container.full-hero {
+    right: 50%;
+    bottom: 50px;
+    transform: translateX(50%) scale(1.6);
+    width: clamp(340px, 42vh, 600px);
+    height: clamp(340px, 42vh, 600px);
+    opacity: 0.85;
+}
+
+.tree-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Elementos SVG del Árbol */
+.tree-trunk {
+    fill: none;
+    stroke: #8c6838;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tree-leaf {
+    fill: #22c55e;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center;
+}
+
+.tree-fruit {
+    fill: var(--gold-main);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 8px var(--gold-light));
+}
+
+.tree-seed {
+    fill: var(--gold-main);
+    transition: all 1s ease;
+}
+
+/* Animación de suave balanceo del árbol */
+@keyframes treeSway {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(1.2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.tree-svg-group {
+    animation: treeSway 8s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+/* Header & Footer Navigation Badges */
+.top-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.06);
+    z-index: 100;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-main), var(--gold-light));
+    box-shadow: 0 0 12px var(--gold-main);
+    transition: width 0.3s ease-out;
+}
+
+.header-biblical-tag {
+    position: fixed;
+    top: 24px;
+    left: 48px;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-title);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--gold-main);
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.9;
+    background: rgba(10, 15, 25, 0.75);
+    padding: 6px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+.footer-slide-num {
+    position: fixed;
+    bottom: 24px;
+    right: 48px;
+    z-index: 90;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(212, 175, 55, 0.85);
+    letter-spacing: 2px;
+    background: rgba(10, 15, 25, 0.75);
+    padding: 6px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+/* ==========================================================================
+   SLIDE SLIDER ENGINE
+   ========================================================================== */
+.slides-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.97) translateY(12px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+    z-index: 20;
+}
+
+.slide.prev {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.03) translateY(-12px);
+}
+
+.slide-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.slide-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35;
+    filter: brightness(0.68) contrast(1.12);
+    animation: kenBurns 35s infinite alternate ease-in-out;
+}
+
+.slide-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(180deg, rgba(6, 9, 17, 0.88) 0%, rgba(6, 9, 17, 0.7) 50%, rgba(6, 9, 17, 0.94) 100%),
+        radial-gradient(circle at 50% 50%, transparent 35%, rgba(6, 9, 17, 0.92) 100%);
+    z-index: 2;
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.12); }
+}
+
+.slide-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1020px;
+    width: 100%;
+    margin: 0 auto;
+    max-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA Y VERSÍCULOS BÍBLICOS
+   ========================================================================== */
+.topic-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.14);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-light);
+    font-family: var(--font-title);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.slide-title-large {
+    font-family: var(--font-title);
+    font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.88);
+    margin-bottom: 16px;
+}
+
+.slide-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+    font-weight: 700;
+    color: var(--gold-main);
+    letter-spacing: 1.2px;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.slide-subtitle-accent {
+    color: var(--gold-light);
+    font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+    font-weight: 600;
+    max-width: 900px;
+    line-height: 1.48;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Tarjeta de Versículo Bíblico Integro con Comillas Limpias */
+.verse-box {
+    background: rgba(10, 16, 28, 0.92);
+    border: 1.5px solid rgba(212, 175, 55, 0.55);
+    border-radius: 18px;
+    padding: 30px 44px;
+    margin: 16px auto 0 auto;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 0 35px rgba(212, 175, 55, 0.08);
+    backdrop-filter: blur(16px);
+    position: relative;
+    text-align: center;
+}
+
+.verse-text {
+    font-family: var(--font-quote);
+    font-size: clamp(1.75rem, 3vw, 2.6rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #ffffff;
+    line-height: 1.42;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+}
+
+.verse-text::before {
+    content: '“';
+    color: var(--gold-main);
+    font-size: 1.1em;
+    margin-right: 4px;
+    font-weight: 900;
+}
+
+.verse-text::after {
+    content: '”';
+    color: var(--gold-main);
+    font-size: 1.1em;
+    margin-left: 4px;
+    font-weight: 900;
+}
+
+.verse-ref {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    letter-spacing: 3.5px;
+    color: var(--gold-main);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* CUADRANTES DE ESTUDIO */
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 920px;
+    margin: 18px auto 0 auto;
+}
+
+.area-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 16px;
+    padding: 22px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+}
+
+.area-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+    opacity: 0.7;
+}
+
+.area-icon {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+}
+
+.area-title {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+}
+
+.area-sub {
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* TARJETAS COMPARATIVAS */
+.compare-container {
+    display: flex;
+    gap: 22px;
+    width: 100%;
+    max-width: 880px;
+    margin: 20px auto 0 auto;
+}
+
+.compare-card {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+.compare-card.owner {
+    border-color: rgba(239, 68, 68, 0.45);
+    background: rgba(35, 15, 20, 0.75);
+}
+
+.compare-card.steward {
+    border-color: rgba(212, 175, 55, 0.65);
+    background: rgba(20, 30, 45, 0.8);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.18);
+}
+
+.compare-tag {
+    font-family: var(--font-title);
+    font-size: 1.45rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.compare-card.owner .compare-tag { color: #f87171; }
+.compare-card.steward .compare-tag { color: var(--gold-main); }
+
+.compare-desc {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* TALENTOS BADGES (5, 2, 1) */
+.talents-numbers-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 22px 0;
+}
+
+.talent-num-badge {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, rgba(10, 15, 25, 0.95) 100%);
+    border: 2px solid var(--gold-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.32);
+}
+
+/* REVELACIÓN DE PASOS (data-step) */
+.step-item {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.step-item.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
